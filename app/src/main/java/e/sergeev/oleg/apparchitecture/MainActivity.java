@@ -1,5 +1,6 @@
 package e.sergeev.oleg.apparchitecture;
 
+import android.arch.lifecycle.Lifecycle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.os.Bundle;
@@ -18,6 +19,7 @@ public class MainActivity extends FragmentActivity{
     MyClassCallBack myClassCallBack = new MyClassCallBack();
     BlankFragment blankFragment;
     SomeClass someClass;
+    UserProfileFragment userProfileFragment;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -29,7 +31,7 @@ public class MainActivity extends FragmentActivity{
         myClassCallBack.registerCallback(blankFragment);
         myClassCallBack.registerCallback(someClass);
 
-        UserProfileFragment userProfileFragment = new UserProfileFragment();
+        userProfileFragment = new UserProfileFragment();
 
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
@@ -45,11 +47,11 @@ public class MainActivity extends FragmentActivity{
             public void onClick(View view) {
                 switch (view.getId()){
                     case R.id.btnYes:
-                        blankFragment.onBtnClicked("YES");
+                        userProfileFragment.onBtnClicked("YES");
                         someClass.callbacking();
                         break;
                     case R.id.btnNo:
-                        blankFragment.onBtnClicked("NO");
+                        userProfileFragment.onBtnClicked("NO");
                         someClass.callbacking();
                         break;
                 }
@@ -57,6 +59,11 @@ public class MainActivity extends FragmentActivity{
         };
         btnN.setOnClickListener(onClickListener);
         btnY.setOnClickListener(onClickListener);
+
+
+        MyServer server = new MyServer();
+
+        getLifecycle().addObserver(server);
 
     }
 }

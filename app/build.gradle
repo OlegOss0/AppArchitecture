@@ -8,7 +8,7 @@ android {
     compileSdkVersion 26
     defaultConfig {
         applicationId "e.sergeev.oleg.apparchitecture"
-        minSdkVersion 21
+        minSdkVersion 19
         targetSdkVersion 26
         versionCode 1
         versionName "1.0"
@@ -57,4 +57,16 @@ dependencies {
 
     // optional - Test helpers for LiveData
     testImplementation "android.arch.core:core-testing:$lifecycle_version"
+
+    //Retrofit
+    implementation group: 'com.squareup.retrofit2', name: 'retrofit', version: '2.4.0'
+
+    //Dagger
+    implementation group: 'com.google.dagger', name: 'dagger', version: '2.16'
+
+    //Room
+    def room_version = "1.1.1"
+
+    implementation "android.arch.persistence.room:runtime:$room_version"
+    annotationProcessor "android.arch.persistence.room:compiler:$room_version"
 }
